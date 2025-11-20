@@ -2,116 +2,109 @@
 
 ## Overview
 
-This project explores **deep learning approaches for classifying American Sign Language (ASL) hand signs** using a custom dataset of 25 labels. The main goal was to compare **baseline and optimized models** with different optimizers and regularization techniques, analyze model stability, and visualize misclassifications. An **extra credit experiment** compares performance on the MNIST dataset for reference.
+This project investigates **deep learning methods for classifying American Sign Language (ASL) hand signs** across 25 classes. The primary goal was to compare how different optimizers and regularization techniques affect accuracy, stability, and overall model behavior. A secondary experiment on MNIST provides a baseline reference against a more uniform dataset.
 
-All code, plots, and results are contained within the provided Jupyter notebook (`.ipynb` file).
+All code, training runs, and visualizations are contained in the Jupyter notebook (`.ipynb`).
 
 ---
 
 ## Dataset
 
-- The ASL dataset is **added manually in Google Colab**.
-- If running locally, update the file path to point to your `data/` folder.
+- The ASL dataset is **manually uploaded** when running in Google Colab.  
+- When running locally, update the dataset path to your `data/` directory.
 
 ---
 
 ## Project Structure
 
-- `notebooks/` – Jupyter notebook with all model training, evaluation, and visualization code
-- `plots/` – Generated figures including accuracy/loss curves, instability charts, and example misclassified images
-- `requirements.yaml` – Conda environment with all necessary dependencies
+- `notebooks/` — Notebook containing training code, evaluation steps, and visualizations  
+- `plots/` — Saved figures (accuracy/loss curves, instability charts, misclassification samples)  
+- `requirements.yaml` — Environment specification for consistent reproduction  
 
 ---
 
 ## Models and Optimizations
 
-1. **Baseline Model**
-   - Optimizer: Adam
-   - No regularization
-   - Dense layers: 512 → 256 → 25
-   - Purpose: Reference for comparison
+### 1. Baseline Model
+- Optimizer: **Adam**
+- No regularization  
+- Dense architecture: **512 → 256 → 25**
+- Serves as a reference point for comparison
 
-2. **Model A: Adam + Dropout**
-   - Dropout: 30% after each dense layer
-   - Helps reduce overfitting and improves generalization
-   - Achieved higher validation stability than baseline
+### 2. Model A — Adam + Dropout
+- Dropout rate: **0.3**
+- Reduces overfitting by randomly deactivating neurons  
+- Produced smoother and more stable validation performance compared to the baseline
 
-3. **Model B: SGD + Batch Normalization**
-   - Batch normalization added after each dense layer
-   - Stabilizes learning by normalizing activations
-   - Resulted in very low instability (std of val_accuracy)
+### 3. Model B — SGD + Batch Normalization
+- Batch normalization added after each dense layer  
+- Normalizes activations to stabilize and speed up training  
+- Showed the **lowest instability** (most consistent learning)
 
-4. **Model C: RMSProp + L2 Regularization**
-   - L2 penalty on weights for both dense layers
-   - Aimed to reduce overfitting
-   - Showed high fluctuation across epochs, demonstrating that regularization can backfire if overapplied
+### 4. Model C — RMSProp + L2 Regularization
+- L2 regularization applied to dense layers  
+- Intended to penalize overly large weights  
+- Displayed noisy validation behavior, showing that overly strong regularization can hinder learning instead of helping
 
 ---
 
 ## Key Analyses
 
-- **Validation Accuracy and Loss:** Overlay plots compare all models across epochs
-- **Instability:** Calculated as standard deviation of validation accuracy to assess model consistency
-- **Classification Reports:** Evaluated per-class performance to identify difficult classes (e.g., 23, 12)
-- **Misclassified Examples:** Visualized similarities between misclassified and true classes
-- **Extra Credit:** MNIST dataset was used to compare optimizer performance across datasets
+- **Validation Curves:** Accuracy and loss compared across all models  
+- **Instability Metric:** Standard deviation of validation accuracy used to evaluate consistency  
+- **Classification Reports:** Identified which classes remained difficult  
+- **Misclassification Visuals:** Side-by-side images highlight similarities between confusing labels  
+- **MNIST Experiment:** Same optimization strategies tested on MNIST for cross-dataset comparison  
 
 ---
 
 ## Findings
 
-- Optimized models generally outperformed the baseline, but not all optimizations improved results.  
-- SGD + BatchNorm was the most stable, while RMSProp + L2 fluctuated significantly.  
-- Classes with high visual similarity were hardest to classify, regardless of optimizer.  
-- Dropout and batch normalization consistently improved generalization, but L2 needs careful tuning.  
-- MNIST is less variable than ASL, making models easier to train and more stable.
+- Most optimizations improved stability or accuracy, but none solved all classification issues.  
+- **SGD + BatchNorm** was the most stable configuration overall.  
+- **RMSProp + L2** was the most unstable, likely from excessive regularization.  
+- Overlapping sign shapes caused consistent misclassification across models.  
+- MNIST proved substantially easier to model due to its lower variability.
 
 ---
 
 ## Usage
 
-1. **Setup Environment**
+- Everything needed to run the project is contained within the notebook.  
+- If running locally, update dataset file paths from the Colab upload workflow.  
 
-```bash
-conda env create -f requirements.yaml
-conda activate asl_dl
-```
-
-## Run Notebook
-
-- All models, evaluations, and plots are self-contained in the notebook  
-- Update dataset paths if running locally  
+---
 
 ## Extra Credit
 
-- Load MNIST dataset  
-- Train models with the same optimizations  
-- Compare performance and visualizations  
+- MNIST dataset loaded and trained with the same optimization settings  
+- Results compared side-by-side with ASL model performance  
+- Visualizations included for direct comparison  
+
+---
 
 ## Ethical Considerations
 
-- Models for sign language recognition may strip emotion and individuality from live signing  
-- Treating sign language purely as a classification task risks reducing an identity feature to a data point  
-- Responsible deployment should complement, not replace, human interaction in Deaf and Hard-of-Hearing communities  
+- Automated sign recognition can unintentionally flatten the nuance and emotional expression present in human signing.  
+- Viewing sign language solely as a classification task risks reducing an identity-rich practice to a technical artifact.  
+- Systems should be designed with careful ethical consideration of the impact on Deaf and Hard-of-Hearing communities.
+
+---
 
 ## Dependencies
 
 - Python 3.12+  
-- TensorFlow/Keras  
+- TensorFlow / Keras  
 - NumPy, Pandas  
 - Matplotlib, Seaborn  
 - Scikit-learn  
 
-*(See `requirements.yaml` for exact versions)*  
+See `requirements.yaml` for full version details.
+
+---
 
 ## Author
 
 **Kirk Corwin**  
 Seattle, WA  
 Data Science & Computer Science Student
-
-
-
-
-
-
