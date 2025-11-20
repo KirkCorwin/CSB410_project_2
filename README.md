@@ -17,8 +17,7 @@ All code, training runs, and visualizations are contained in the Jupyter noteboo
 
 ## Project Structure
 
-- `notebooks/` — Notebook containing training code, evaluation steps, and visualizations  
-- `plots/` — Saved figures (accuracy/loss curves, instability charts, misclassification samples)  
+- `project_2.ipynb` — notebook containing all training code, evaluation steps, and visualizations  
 - `requirements.yaml` — Environment specification for consistent reproduction  
 
 ---
